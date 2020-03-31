@@ -1,15 +1,33 @@
 {
   "name": "easytrip",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon index.html"
   },
   "keywords": [],
-  "author": "",
+  "author": "GM_Altynai",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
+    "@types/express": "^4.17.3",
+    "nodemon": "^2.0.2",
+    "tslint": "^6.1.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mssql": "^6.2.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gm808035/easytrip.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gm808035/easytrip/issues"
+  },
+  "homepage": "https://github.com/gm808035/easytrip#readme",
+  "description": ""
 }
