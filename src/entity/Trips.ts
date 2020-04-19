@@ -1,5 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
 import {User} from "./Users";
+import {City} from "./CIties";
 @Entity({name:"trips"})
 export class Trip {
 
@@ -13,12 +14,19 @@ export class Trip {
     // @Column({nullable: false})
     @JoinColumn()
     driver: User;
+    @ManyToOne(type => City,city=>city.id,{
+        nullable: false,
+        cascade: true
+    })
+    @JoinColumn()
+    point_of_shipment: City;
 
-    @Column({length:100,nullable: false})
-    from: string;
-
-    @Column({length:100,nullable: false})
-    destination: string;
+    @ManyToOne(type => City,city=>city.id,{
+        nullable: false,
+        cascade: true
+    })
+    @JoinColumn()
+    destination: City;
 
     @Column("date",{nullable: false})
     date: Date;

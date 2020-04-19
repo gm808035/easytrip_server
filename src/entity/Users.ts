@@ -1,6 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne,JoinColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne, JoinColumn, OneToOne} from "typeorm";
 import {Car} from "./Cars";
 import * as bcrypt from "bcryptjs";
+import {Preference} from "./Preferences";
 
 @Entity({name:"users"})
 export class User {
@@ -50,12 +51,19 @@ export class User {
     @Column("text")
     inf_about_yourself: string;
 
-    @ManyToOne(type => Car, Car => Car.id, {
+    @ManyToOne(type => Car, car => car.id, {
         nullable: false,
         cascade: true
     })
     @JoinColumn()
     car: Car;
+
+    @OneToOne(() => Preference, (preference: Preference) => preference.user, {
+        cascade: true,
+        eager: true
+    })
+    @JoinColumn()
+    preference: Preference;
 
     hashPassword() {
         this.password = bcrypt.hashSync(this.password, 8);
