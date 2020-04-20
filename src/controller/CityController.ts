@@ -1,9 +1,7 @@
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import {City} from "../entity/CIties";
-
 export class CityController {
-
     static all = async (req: Request, res: Response, next: NextFunction) => {
         //Get cities from database
         const cityRepository = getRepository(City);
