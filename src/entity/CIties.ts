@@ -7,5 +7,5 @@ export class City {
     id: number;
 
     @Column({length:100})
-    city: string;
+    city_name: string;
 }

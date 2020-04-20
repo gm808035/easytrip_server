@@ -1,23 +1,15 @@
-import {UserController} from "./controller/UserController";
+import { Router, Request, Response } from "express";
+import auth from "./ruotes/auth";
+import user from "./ruotes/user";
+import car from "./ruotes/car";
+import preference from "./ruotes/preference";
+import city from "./ruotes/city";
+const router = Router();
 
-export const Routes = [{
-    method: "get",
-    route: "/users",
-    controller: UserController,
-    action: "all"
-}, {
-    method: "get",
-    route: "/users/:id",
-    controller: UserController,
-    action: "one"
-}, {
-    method: "post",
-    route: "/users",
-    controller: UserController,
-    action: "save"
-}, {
-    method: "delete",
-    route: "/users/:id",
-    controller: UserController,
-    action: "remove"
-}];
+router.use("/auth", auth);
+router.use("/users", user);
+router.use("/cars", car);
+router.use("/preferences", preference);
+router.use("/cities", city);
+
+export default router;

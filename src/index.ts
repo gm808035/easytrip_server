@@ -1,31 +1,25 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import {User} from "./entity/Users";
-import {Car} from "./entity/Cars";
-import {Trip} from "./entity/Trips";
-import {Passenger} from "./entity/Passengers";
-import {City} from "./entity/CIties";
-import {Intermediate_point} from "./entity/Intermediate_points";
-import {Preference} from "./entity/Preferences";
-var sql = require('mssql');
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import * as cors from "cors";
+import * as helmet from "helmet";
+import routes from "./routes";
 
-createConnection({
-    "type": "mssql",
-    "host": "DESKTOP-IKSB8VU\\SQLEXPRESS1",
-    "username": "KA",
-    "password": "123",
-    "database": "ETrip",
-    entities: [
-        User,
-        Car,
-        Trip,
-        Passenger,
-        City,
-        Intermediate_point,
-        Preference
-    ],
-    synchronize: true,
-    logging: false
-}).then(connection => {
-    // here you can start to work with your entities
+createConnection().then(async connection => {
+    // create express app
+    const app = express();
+    app.use(cors());
+    app.use(helmet());
+    app.use(bodyParser.json());
+
+    // setup express app here
+    // ...
+    app.use("/", routes);
+
+    // start express server
+    app.listen(3000);
+
+    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
+
 }).catch(error => console.log(error));

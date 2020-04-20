@@ -2,7 +2,10 @@ import {Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne, JoinColumn, On
 import {Car} from "./Cars";
 import * as bcrypt from "bcryptjs";
 import {Preference} from "./Preferences";
-
+enum Gender {
+    male,
+    female
+}
 @Entity({name:"users"})
 export class User {
 
@@ -31,8 +34,8 @@ export class User {
     @Column({length: 100,nullable: false})
     surname: string;
 
-    @Column({length: 10,nullable: false})
-    gender: string;
+    @Column()
+    gender: Gender;
 
     @Column("date",{nullable: false})
     date_of_Birth: Date;
