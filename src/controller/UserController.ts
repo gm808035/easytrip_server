@@ -42,7 +42,7 @@ export class UserController {
 
         // Try to save. If fails, the username is already in use
         try {
-            await userRepository.save(user);
+           await userRepository.save(user);
         } catch (e) {
             res.status(409).send("email, phone already in use");
             return;

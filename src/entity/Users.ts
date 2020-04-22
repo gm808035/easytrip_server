@@ -16,13 +16,6 @@ export class User {
         nullable: false,
         length:100
     })
-    @Index({ unique: true})
-    login: string;
-
-    @Column({
-        nullable: false,
-        length:100
-    })
     password: string;
 
     @Column({
