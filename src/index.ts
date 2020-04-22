@@ -4,7 +4,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import * as helmet from "helmet";
-import routes from "./routes";
+import routes from "./routes"
 
 createConnection().then(async connection => {
     // create express app
