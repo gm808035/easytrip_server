@@ -1,9 +1,9 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
-import{Trip} from "./Trips";
-import {City} from "./CIties";
+import{Trip} from "./Trip";
+import {User} from "./User";
 
-@Entity({name:"intermediate_points"})
-export class Intermediate_point {
+@Entity({name:"passengers"})
+export class Passenger {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -15,10 +15,11 @@ export class Intermediate_point {
     @JoinColumn()
     trip_id: Trip;
 
-    @ManyToOne(type => City,city=>city.id,{
+    @ManyToOne(type => User, user => user.id, {
         nullable: false,
         cascade: true
     })
+    // @Column({nullable: false})
     @JoinColumn()
-    intermediate_point: City;
+    passenger: User;
 }

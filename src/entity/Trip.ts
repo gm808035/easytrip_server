@@ -1,6 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
-import {User} from "./Users";
-import {City} from "./CIties";
+import {User} from "./User";
+import {City} from "./CIty";
 @Entity({name:"trips"})
 export class Trip {
 

@@ -1,11 +1,12 @@
 import {Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne, JoinColumn, OneToOne} from "typeorm";
-import {Car} from "./Cars";
+import {Car} from "./Car";
 import * as bcrypt from "bcryptjs";
-import {Preference} from "./Preferences";
+import {Preference} from "./Preference";
 enum Gender {
-    male,
-    female
+    male = "Male",
+    female = "Female"
 }
+
 @Entity({name:"users"})
 export class User {
 
@@ -23,7 +24,7 @@ export class User {
         nullable: false
 })
     name: string;
-        
+
     @Column({length: 100,nullable: false})
     surname: string;
 
@@ -47,12 +48,12 @@ export class User {
     @Column("text")
     inf_about_yourself: string;
 
-    @ManyToOne(type => Car, car => car.id, {
-        nullable: false,
-        cascade: true
-    })
-    @JoinColumn()
-    car: Car;
+    // @ManyToOne(type => Car, car => car.id, {
+    //     nullable: false,
+    //     cascade: true
+    // })
+    // @JoinColumn()
+    // car: Car;
 
     @OneToOne(() => Preference, (preference: Preference) => preference.user, {
         cascade: true,

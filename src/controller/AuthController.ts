@@ -3,7 +3,7 @@ import  * as jwt from "jsonwebtoken";
 import  { getRepository } from "typeorm";
 import { validate } from "class-validator";
 
-import {User} from "../entity/Users";
+import {User} from "../entity/User";
 import config from "../config/config";
 
 class AuthController {
@@ -41,6 +41,9 @@ class AuthController {
         // Send the jwt in the response
         res.send(token);
     };
+    static logout = async (req: Request, res: Response) => {
+        res.status(200).send("User logout successfully");
+    }
 
     static changePassword = async (req: Request, res: Response) => {
         // Get ID from JWT

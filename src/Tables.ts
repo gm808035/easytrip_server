@@ -1,12 +1,12 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import {User} from "./entity/Users";
-import {Car} from "./entity/Cars";
-import {Trip} from "./entity/Trips";
-import {Passenger} from "./entity/Passengers";
-import {City} from "./entity/CIties";
-import {Intermediate_point} from "./entity/Intermediate_points";
-import {Preference} from "./entity/Preferences";
+import {User} from "./entity/User";
+import {Car} from "./entity/Car";
+import {Trip} from "./entity/Trip";
+import {Passenger} from "./entity/Passenger";
+import {City} from "./entity/CIty";
+import {Intermediate_point} from "./entity/Intermediate_point";
+import {Preference} from "./entity/Preference";
 var sql = require('mssql');
 
 createConnection({

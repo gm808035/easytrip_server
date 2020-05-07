@@ -1,7 +1,7 @@
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
-import {User} from "../entity/Users";
-import {Car} from "../entity/Cars";
+import {User} from "../entity/User";
+import {Car} from "../entity/Car";
 
 export class CarController {
     static all = async (req: Request,res:Response, next:NextFunction) =>{

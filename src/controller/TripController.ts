@@ -1,7 +1,7 @@
 import {Response,Request,NextFunction} from "express";
-import{Trip} from "../entity/Trips";
+import{Trip} from "../entity/Trip";
 import {getRepository} from "typeorm";
-import {City} from "../entity/CIties";
+import {City} from "../entity/CIty";
 
 export class TripController {
 

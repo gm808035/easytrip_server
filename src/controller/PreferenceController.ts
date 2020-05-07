@@ -1,6 +1,6 @@
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
-import {Preference} from "../entity/Preferences";
+import {Preference} from "../entity/Preference";
 
 export class PreferenceController {
 

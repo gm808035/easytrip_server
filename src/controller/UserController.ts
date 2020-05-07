@@ -1,6 +1,6 @@
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
-import {User} from "../entity/Users";
+import {User} from "../entity/User";
 
 export class UserController {
 
@@ -34,7 +34,7 @@ export class UserController {
         user.date_of_Birth = date_of_Birth;
         user.phone = phone;
         user.inf_about_yourself = inf_about_yourself;
-        user.car = car;
+        // user.car = car;
         user.preference = preference;
 
         // Hash the password, to securely store on DB

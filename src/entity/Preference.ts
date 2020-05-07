@@ -1,10 +1,12 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToOne} from "typeorm";
-import {User} from "./Users";
+import {User} from "./User";
 
 enum Status {
-    good,
-    normal,
-    bad
+
+    good = "Good",
+    normal = "Normal",
+    bad = "Bad"
+
 }
 
 @Entity()
