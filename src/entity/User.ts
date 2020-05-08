@@ -2,6 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne, JoinColumn, On
 import {Car} from "./Car";
 import * as bcrypt from "bcryptjs";
 import {Preference} from "./Preference";
+import {type} from "os";
 enum Gender {
     male = "Male",
     female = "Female"
@@ -47,6 +48,9 @@ export class User {
 
     @Column("text")
     inf_about_yourself: string;
+
+    @Column({nullable: true})
+    photo: string;
 
     // @ManyToOne(type => Car, car => car.id, {
     //     nullable: false,

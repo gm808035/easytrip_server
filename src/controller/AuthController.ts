@@ -37,9 +37,8 @@ class AuthController {
             config.jwtSecret,
             { expiresIn: "1h" }
         );
-
         // Send the jwt in the response
-        res.send(token);
+        res.send({token: token, user: user});
     };
     static logout = async (req: Request, res: Response) => {
         res.status(200).send("User logout successfully");

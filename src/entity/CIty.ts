@@ -8,4 +8,7 @@ export class City {
 
     @Column({length:100})
     city_name: string;
+
+    @Column({length:100})
+    attribute: string;
 }
