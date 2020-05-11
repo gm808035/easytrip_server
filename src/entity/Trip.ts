@@ -11,9 +11,9 @@ export class Trip {
         nullable: false,
         cascade: true
     })
-    // @Column({nullable: false})
     @JoinColumn()
     driver: User;
+
     @ManyToOne(type => City,city=>city.id,{
         nullable: false,
         cascade: true
