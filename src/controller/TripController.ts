@@ -21,13 +21,25 @@ export class TripController {
         }
     }
 
-    static find = async (req: Request, res: Response, next: NextFunction) => {
+    static search = async (req: Request, res: Response, next: NextFunction) => {
         const tripRepository = getRepository(Trip);
+        let{point_of_shipment, destination, date, time} = req.body;
+        // let searchData: []
+        console.log(req.body)
+        console.log(point_of_shipment)
+        console.log(destination)
+        console.log(date)
+        console.log(time)
         try {
-            const trip = await tripRepository.findOneOrFail(req.params.point_of_shipment);
-            res.send(trip);
-        } catch (error) {
-            res.status(404).send("Trip not found");
+            console.log("test")
+           const trips = await tripRepository.find({
+                where:  {point_of_shipment: point_of_shipment, destination: destination, date: date, time: time}
+            });
+            res.send(trips);
+            console.log(typeof(trips));
+            console.log(trips);
+        }catch (error) {
+            res.status(404).send("Not found");
         }
     }
 
@@ -38,7 +50,6 @@ export class TripController {
 
         let {driver, point_of_shipment, destination, date,time, price, amount_of_seats, free_seats, waypoints} = req.body;
         let trip = new Trip();
-        // let intermediate_point = new Intermediate_point();
         trip.driver = driver;
         trip.point_of_shipment = point_of_shipment;
         trip.destination = destination;
@@ -51,10 +62,10 @@ export class TripController {
 
         let points = []
         for (let i = 0; i < waypoints.length; i++) {
-            const intermediate_point = { trip: {}, points: 0 };
-            intermediate_point.trip = trip;
+            const intermediate_point = { trip_id: {}, intermediate_point: 0 };
+            intermediate_point.trip_id = trip;
 
-            intermediate_point.points = waypoints[i];
+            intermediate_point.intermediate_point = waypoints[i];
 
             points.push(intermediate_point);
         }

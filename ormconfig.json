@@ -1,10 +1,10 @@
 {
-   "type": "mssql",
-   "host": "DESKTOP-IKSB8VU\\SQLEXPRESS1",
-   "port": 1433,
-   "username": "KA",
-   "password": "123",
-   "database": "ETrip",
+   "type": "postgres",
+   "host": "localhost",
+   "port": 5432,
+   "username": "postgres",
+   "password": "4552",
+   "database": "EasyTrip",
    "synchronize": true,
    "logging": false,
    "entities": [

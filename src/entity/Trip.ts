@@ -21,9 +21,10 @@ export class Trip {
     @JoinColumn()
     point_of_shipment: City;
 
-    @Column("int", { array: true })
-    waypoints: number[];
-
+    // @Column("int", { array: true, nullable:true })
+    // waypoints: number[];
+    @Column("int", {array: true})
+    waypoints: number;
 
     @ManyToOne(type => City,city=>city.id,{
         nullable: false,
