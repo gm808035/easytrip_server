@@ -1,6 +1,7 @@
 import {getRepository} from "typeorm";
 import {NextFunction,Response,Request} from "express";
 import{Trip} from "../entity/Trip";
+import {Intermediate_point} from "../entity/Intermediate_point";
 
 export class TripController {
 
@@ -20,14 +21,24 @@ export class TripController {
         }
     }
 
+    static find = async (req: Request, res: Response, next: NextFunction) => {
+        const tripRepository = getRepository(Trip);
+        try {
+            const trip = await tripRepository.findOneOrFail(req.params.point_of_shipment);
+            res.send(trip);
+        } catch (error) {
+            res.status(404).send("Trip not found");
+        }
+    }
+
+
     static save = async (req: Request, res: Response, next: NextFunction) => {
         const tripRepository = getRepository(Trip);
-        // const pointRepository = getRepository(IntermediatePoint);
+        const pointRepository = getRepository(Intermediate_point);
 
-        let {driver, point_of_shipment, destination, date,time, price, amount_of_seats, free_seats} = req.body;
+        let {driver, point_of_shipment, destination, date,time, price, amount_of_seats, free_seats, waypoints} = req.body;
         let trip = new Trip();
-        // let intermediate_point = new IntermediatePoint();
-
+        // let intermediate_point = new Intermediate_point();
         trip.driver = driver;
         trip.point_of_shipment = point_of_shipment;
         trip.destination = destination;
@@ -36,7 +47,18 @@ export class TripController {
         trip.price = price;
         trip.amount_seats = amount_of_seats;
         trip.free_seats = free_seats;
+        trip.waypoints = waypoints;
 
+        let points = []
+        for (let i = 0; i < waypoints.length; i++) {
+            const intermediate_point = { trip: {}, points: 0 };
+            intermediate_point.trip = trip;
+
+            intermediate_point.points = waypoints[i];
+
+            points.push(intermediate_point);
+        }
+        await pointRepository.save(points);
         // Try to save.
         try {
             await tripRepository.save(trip);
