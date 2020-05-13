@@ -7,6 +7,7 @@ router.get("/", TripController.all);
 router.get("/:id", TripController.one)
 router.post("/", TripController.save);
 router.post("/search", TripController.search);
+router.post("/myTrips/", TripController.myTrips);
 router.delete("/:id", TripController.remove);
 router.put("/:id",TripController.edit);
 export default router;

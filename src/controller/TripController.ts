@@ -21,23 +21,31 @@ export class TripController {
         }
     }
 
+    static myTrips = async (req: Request, res: Response, next: NextFunction) => {
+        //Get My trips from database
+        const driverId = req.body.driver;
+
+        const tripRepository = getRepository(Trip);
+        const myTrips = await tripRepository.find({ where: { driver: driverId} });
+        //Send the myTrips object
+        res.send(myTrips);
+    };
+
     static search = async (req: Request, res: Response, next: NextFunction) => {
         const tripRepository = getRepository(Trip);
         let{point_of_shipment, destination, date, time} = req.body;
-        // let searchData: []
-        console.log(req.body)
-        console.log(point_of_shipment)
-        console.log(destination)
-        console.log(date)
-        console.log(time)
         try {
-            console.log("test")
-           const trips = await tripRepository.find({
+           let trips = await tripRepository.find({
                 where:  {point_of_shipment: point_of_shipment, destination: destination, date: date, time: time}
             });
+           if(trips.length === 0){
+                trips = await tripRepository.find({
+                   where:  {point_of_shipment: point_of_shipment, destination: destination, date: date}
+               });
+                res.send(trips);
+           }
             res.send(trips);
-            console.log(typeof(trips));
-            console.log(trips);
+
         }catch (error) {
             res.status(404).send("Not found");
         }

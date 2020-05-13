@@ -9,14 +9,16 @@ export class Trip {
 
     @ManyToOne(type => User, user => user.id, {
         nullable: false,
-        cascade: true
-    })
+        cascade: true,
+        eager: true
+})
     @JoinColumn()
     driver: User;
 
     @ManyToOne(type => City,city=>city.id,{
         nullable: false,
-        cascade: true
+        cascade: true,
+        eager: true
     })
     @JoinColumn()
     point_of_shipment: City;
@@ -28,7 +30,8 @@ export class Trip {
 
     @ManyToOne(type => City,city=>city.id,{
         nullable: false,
-        cascade: true
+        cascade: true,
+        eager: true
     })
     @JoinColumn()
     destination: City;
