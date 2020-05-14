@@ -6,6 +6,7 @@ import preference from "./ruotes/preference";
 import city from "./ruotes/city";
 import trip from "./ruotes/trip"
 import point from "./ruotes/point"
+
 const router = Router();
 
 router.use("/auth", auth);

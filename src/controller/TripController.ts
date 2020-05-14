@@ -1,7 +1,9 @@
 import {getRepository} from "typeorm";
 import {NextFunction,Response,Request} from "express";
+import {getConnection} from "typeorm";
 import{Trip} from "../entity/Trip";
 import {Intermediate_point} from "../entity/Intermediate_point";
+import {Passenger} from "../entity/Passenger";
 
 export class TripController {
 
@@ -20,6 +22,34 @@ export class TripController {
             res.status(404).send("Trip not found");
         }
     }
+    static order = async (req: Request, res: Response, next: NextFunction) => {
+        const passengersRepository = getRepository(Passenger);
+        const tripRepository = getRepository(Trip);
+        let {trip_id, passenger} = req.body;
+        let pass = new Passenger();
+        pass.trip_id = trip_id,
+        pass.passenger = passenger,
+
+        await passengersRepository.save(pass);
+        // Try to save.
+        try {
+            await passengersRepository.save(pass);
+            await getConnection()
+                .createQueryBuilder()
+                .update(Trip)
+                .set({
+                    free_seats: () => "free_seats - 1"
+                })
+                .where("id = :id", { id: trip_id })
+                .execute();
+
+        } catch (error) {
+            res.status(409).send("Check fields");
+            return;
+        }
+        // If all ok, send 201 response
+        res.status(201).send(pass);
+    };
 
     static myTrips = async (req: Request, res: Response, next: NextFunction) => {
         //Get My trips from database
@@ -65,7 +95,7 @@ export class TripController {
         trip.time = time;
         trip.price = price;
         trip.amount_seats = amount_of_seats;
-        trip.free_seats = free_seats;
+        trip.free_seats = amount_of_seats;
         trip.waypoints = waypoints;
 
         let points = []
