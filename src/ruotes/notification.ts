@@ -7,6 +7,7 @@ const router = Router();
 router.get("/", NotificationController.all);
 router.get("/:id", NotificationController.one);
 router.post("/", NotificationController.save);
+router.post("/myNotifications/", NotificationController.myNotifications);
 router.delete("/:id", NotificationController.remove);
 
 export default router;

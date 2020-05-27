@@ -17,7 +17,14 @@ export class Notification {
         cascade: true
     })
     @JoinColumn()
-    user: User;
+    toUser: User;
+
+    @ManyToOne(type => User, user => user.id, {
+        nullable: false,
+        cascade: true
+    })
+    @JoinColumn()
+    fromUser: User;
 
     // @ManyToOne(type => NotificationType, type => type.id, {
     //     nullable: false,
