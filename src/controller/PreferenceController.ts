@@ -23,19 +23,21 @@ export class PreferenceController {
     }
     static save = async (req: Request, res: Response, next: NextFunction) => {
         const preferenceRepository = getRepository(Preference);
-        let {talk, smoke, animal, music} = req.body;
+        let {talk, smoke, animal, music, user} = req.body;
         let preference = new Preference();
         preference.talk = talk;
         preference.smoke = smoke;
         preference.animal = animal;
         preference.music = music;
-
+        preference.user = user;
         // Try to save.
         try {
             await preferenceRepository.save(preference);
         } catch (error) {
+            console.log("test")
             res.status(409).send("Check fields");
             return;
+
         }
 
         // If all ok, send 201 response

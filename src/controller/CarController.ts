@@ -2,6 +2,7 @@ import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import {User} from "../entity/User";
 import {Car} from "../entity/Car";
+import {Trip} from "../entity/Trip";
 
 export class CarController {
     static all = async (req: Request,res:Response, next:NextFunction) =>{
@@ -13,19 +14,27 @@ export class CarController {
     };
 
     static one = async (req:Request, res:Response, next:NextFunction)=>{
+        // const carRepository = getRepository(Car);
+        // try{
+        //     const car = await carRepository.findOneOrFail(req.params.id);
+        //     res.send(car);
+        // }catch (error) {
+        //     res.status(404).send("Car not found");
+        // }
+        //Get My trips from database
+        const user = req.body.user;
+
         const carRepository = getRepository(Car);
-        try{
-            const car = await carRepository.findOneOrFail(req.params.id);
-            res.send(car);
-        }catch (error) {
-            res.status(404).send("Car not found");
-        }
+        const myCar = await carRepository.find({ where: { user: user} });
+        //Send the myTrips object
+        res.send(myCar);
     }
 
     static save = async (req:Request, res:Response, next:NextFunction)=>{
         const carRepository = getRepository(Car);
-        let{car_model, country, car_number} = req.body
+        let{ user,car_model, country, car_number} = req.body
         let car= new Car();
+        car.user = user;
         car.car_model = car_model;
         car.country = country;
         car.car_number = car_number;
@@ -35,6 +44,7 @@ export class CarController {
         }catch (error) {
             res.status(409).send("Check fields");
             return;
+
         }
         //if all ok, send 201 res
         res.status(201).send(car);
@@ -56,7 +66,7 @@ export class CarController {
         }
         car.car_model = car_model;
         car.country = country;
-        car.car_number = car_model;
+        car.car_number = car_number;
         //try to save
         try {
             await carRepository.save(car);

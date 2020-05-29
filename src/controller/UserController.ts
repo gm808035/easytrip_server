@@ -35,7 +35,7 @@ export class UserController {
         user.phone = phone;
         user.inf_about_yourself = inf_about_yourself;
         // user.car = car;
-        user.preference = preference;
+        // user.preference = preference;
 
         // Hash the password, to securely store on DB
         user.hashPassword();
@@ -54,10 +54,9 @@ export class UserController {
 
     static edit = async (req: Request, res: Response, next: NextFunction) => {
         const userRepository = getRepository(User);
-        let userId = await userRepository.findOne(req.params.id);
-
+        let userId =req.body.userId;
         //Get values from the body
-        const {email, password, name, surname, gender, phone} = req.body;
+        const {email, password, name, surname, phone, inf_about_yourself,date_of_Birth} = req.body;
         let user;
         try {
             user = await userRepository.findOneOrFail(userId);
@@ -70,9 +69,10 @@ export class UserController {
         user.email = email;
         user.name = name;
         user.surname = surname;
-        user.gender = gender;
         user.phone = phone;
         user.password = password;
+        user.inf_about_yourself = inf_about_yourself;
+        user.date_of_Birth = date_of_Birth;
 
         user.hashPassword();
 

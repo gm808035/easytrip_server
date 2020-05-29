@@ -50,4 +50,7 @@ export class Trip {
 
     @Column({nullable: false})
     free_seats: number;
+
+    @Column("text")
+    inf_about_trip: string;
 }

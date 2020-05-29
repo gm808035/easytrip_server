@@ -59,12 +59,12 @@ export class User {
     // @JoinColumn()
     // car: Car;
 
-    @OneToOne(() => Preference, (preference: Preference) => preference.user, {
-        cascade: true,
-        eager: true
-    })
-    @JoinColumn()
-    preference: Preference;
+    // @OneToOne(() => Preference, (preference: Preference) => preference.user, {
+    //     cascade: true,
+    //     eager: true
+    // })
+    // @JoinColumn()
+    // preference: Preference;
 
     hashPassword() {
         this.password = bcrypt.hashSync(this.password, 8);
