@@ -1,6 +1,8 @@
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import {Preference} from "../entity/Preference";
+import {Car} from "../entity/Car";
+import {Trip} from "../entity/Trip";
 
 export class PreferenceController {
 
@@ -12,12 +14,22 @@ export class PreferenceController {
         res.send(preferences);
     };
 
+
     static one = async (req: Request, res: Response, next: NextFunction) => {
         const preferenceRepository = getRepository(Preference);
-        try {
-            const preference = await preferenceRepository.findOneOrFail(req.params.id);
-            res.send(preference);
-        } catch (error) {
+        // try {
+        //     const preference = await preferenceRepository.findOneOrFail(req.params.id);
+        //     res.send(preference);
+        // } catch (error) {
+        //     res.status(404).send("Preference not found");
+        // }
+        const userId = req.body.user;
+        try{
+            const myPref = await preferenceRepository.find({ where: { userId: userId} });
+            //Send the myTrips object
+            res.send(myPref);
+        }
+        catch (error) {
             res.status(404).send("Preference not found");
         }
     }
@@ -30,9 +42,11 @@ export class PreferenceController {
         preference.animal = animal;
         preference.music = music;
         preference.user = user;
+
         // Try to save.
         try {
             await preferenceRepository.save(preference);
+
         } catch (error) {
             console.log("test")
             res.status(409).send("Check fields");
@@ -46,23 +60,26 @@ export class PreferenceController {
 
     static edit = async (req: Request, res: Response, next: NextFunction) => {
         const preferenceRepository = getRepository(Preference);
-        let preferenceId = await preferenceRepository.findOne(req.params.id);
+        let userId = req.body.userId;
 
         //Get values from the body
         const {talk, smoke, animal, music} = req.body;
         let preference;
         try {
-            preference = await preferenceRepository.findOneOrFail(preferenceId);
+            preference = await preferenceRepository.findOneOrFail(userId);
         } catch (error) {
             //If not found, send a 404 response
             res.status(404).send("Preference not found");
             return;
+            console.log("test")
+
         }
 
         preference.talk = talk;
         preference.smoke = smoke;
         preference.animal = animal;
         preference.music = music;
+        console.log(preference)
 
 
         //Try to save.

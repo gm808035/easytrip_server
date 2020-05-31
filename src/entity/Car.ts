@@ -6,6 +6,7 @@ export class Car {
 
     @PrimaryGeneratedColumn()
     id: number;
+
     @ManyToOne(type => User, user => user.id, {
         nullable: false,
         cascade: true,
@@ -13,6 +14,7 @@ export class Car {
     })
     @JoinColumn()
     user: User;
+
     @Column({length:50})
     car_model: string;
 

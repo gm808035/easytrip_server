@@ -158,15 +158,15 @@ export class TripController {
 
     static remove = async (req: Request, res: Response, next: NextFunction) => {
         const tripRepository = getRepository(Trip);
-        const passengersRepository = getRepository(Passenger);
-        const pointRepository = getRepository(Intermediate_point);
+        // const passengersRepository = getRepository(Passenger);
+        // const pointRepository = getRepository(Intermediate_point);
 
         let tripToRemove = await tripRepository.findOne(req.params.id);
-        let passengerToRemove = await passengersRepository.findOne(req.params.id);
-        let pointToRemove = await pointRepository.findOne(req.params.id);
+        // let passengerToRemove = await passengersRepository.findOne(req.params.id);
+        // let pointToRemove = await pointRepository.findOne(req.params.id);
         try {
-            await pointRepository.remove(pointToRemove);
-            await passengersRepository.remove(passengerToRemove);
+            // await pointRepository.remove(pointToRemove);
+            // await passengersRepository.remove(passengerToRemove);
             await tripRepository.remove(tripToRemove);
         } catch (error) {
             res.status(404).send("Trip not found");

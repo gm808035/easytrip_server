@@ -17,7 +17,8 @@ export class Passenger {
 
     @ManyToOne(type => User, user => user.id, {
         nullable: false,
-        cascade: true
+        cascade: true,
+        eager: true
     })
     // @Column({nullable: false})
     @JoinColumn()

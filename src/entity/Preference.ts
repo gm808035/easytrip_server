@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToOne} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne} from "typeorm";
 import {User} from "./User";
 
 enum Status {
@@ -16,17 +16,22 @@ export class Preference {
     id: number;
 
     @Column()
-    talk: Status;
+    talk: string;
 
     @Column()
-    smoke: Status;
+    smoke: string;
 
     @Column()
-    animal: Status;
+    animal: string;
 
     @Column()
-    music: Status;
+    music: string;
 
-    @OneToOne(() => User, (user: User) => user.preference)
+    @ManyToOne(type => User, user => user.id, {
+        nullable: false,
+        cascade: true,
+        eager: true
+    })
+    @JoinColumn()
     user: User;
 }

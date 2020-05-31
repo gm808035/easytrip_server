@@ -1,6 +1,7 @@
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import {User} from "../entity/User";
+import {Preference} from "../entity/Preference";
 
 export class UserController {
 
@@ -23,8 +24,10 @@ export class UserController {
     }
     static save = async (req: Request, res: Response, next: NextFunction) => {
         const userRepository = getRepository(User);
-        let {email, password, name, surname, gender, date_of_Birth, phone, inf_about_yourself, car, preference} = req.body;
+        const preferenceRepository = getRepository(Preference);
+        let {email, password, name, surname, gender, date_of_Birth, phone, inf_about_yourself, talk, smoke, animal,music} = req.body;
         let user = new User();
+        let pref = new Preference();
 
         user.email = email;
         user.password = password;
@@ -34,8 +37,6 @@ export class UserController {
         user.date_of_Birth = date_of_Birth;
         user.phone = phone;
         user.inf_about_yourself = inf_about_yourself;
-        // user.car = car;
-        // user.preference = preference;
 
         // Hash the password, to securely store on DB
         user.hashPassword();
@@ -43,6 +44,12 @@ export class UserController {
         // Try to save. If fails, the username is already in use
         try {
            await userRepository.save(user);
+            pref.talk = "Normal";
+            pref.smoke = "Normal";
+            pref.animal = "Normal";
+            pref.music = "Normal";
+            pref.user = user;
+           await preferenceRepository.save(pref);
         } catch (e) {
             res.status(409).send("email, phone already in use");
             return;
@@ -50,6 +57,8 @@ export class UserController {
 
         // If all ok, send 201 response
         res.status(201).send(user);
+        res.status(201).send(pref);
+
     }
 
     static edit = async (req: Request, res: Response, next: NextFunction) => {
