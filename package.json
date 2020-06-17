@@ -4,19 +4,24 @@
    "main": "index.js",
    "scripts": {
       "start": "ts-node src/index.ts",
-      "dev": "nodemon index.html"
+      "dev": "nodemon index.html",
+      "test": "mocha"
    },
    "keywords": [],
    "author": "GM_Altynai",
    "license": "ISC",
    "devDependencies": {
-      "bcryptjs": "^2.4.3",
       "@types/express": "^4.17.3",
+      "@types/node": "^8.0.29",
+      "bcryptjs": "^2.4.3",
+      "chai": "^4.2.0",
+      "mocha": "^7.2.0",
       "nodemon": "^2.0.2",
-      "tslint": "^6.1.0",
-      "typescript": "3.3.3333",
+      "sinon": "^1.17.7",
+      "supertest": "^4.0.2",
       "ts-node": "3.3.0",
-      "@types/node": "^8.0.29"
+      "tslint": "^6.1.0",
+      "typescript": "3.3.3333"
    },
    "dependencies": {
       "@types/body-parser": "^1.19.0",
@@ -34,12 +39,13 @@
       "helmet": "^3.22.0",
       "jsonwebtoken": "^8.5.1",
       "mdbootstrap": "^4.15.0",
+      "mongoose": "~5.0.9",
       "mssql": "^4.0.4",
       "mysql": "^2.14.1",
       "pg": "^8.1.0",
       "reflect-metadata": "^0.1.10",
-      "typeorm": "0.2.24",
-      "routing-controllers": "^0.8.0"
+      "routing-controllers": "^0.8.0",
+      "typeorm": "0.2.24"
    },
    "repository": {
       "type": "git",

@@ -14,15 +14,6 @@ export class PassengerController {
         res.send(passengers);
     };
 
-    // static one = async (req: Request, res: Response, next: NextFunction) => {
-    //     const userRepository = getRepository(User);
-    //     try {
-    //         const user = await userRepository.findOneOrFail(req.params.id);
-    //         res.send(user);
-    //     } catch (error) {
-    //         res.status(404).send("User not found");
-    //     }
-    // }
     static myPassenger = async (req: Request, res: Response, next: NextFunction) => {
         //Get My trips from database
         const tripIdNumber = req.body.tripIdInf;

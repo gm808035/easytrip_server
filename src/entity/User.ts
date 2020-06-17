@@ -53,21 +53,6 @@ export class User {
     @Column({nullable: true})
     photo: string;
 
-    // @OneToMany(type => Car, car => car.id, {
-    //     nullable: false,
-    //     cascade: true,
-    //     eager: true
-    // })
-    // @JoinColumn()
-    // car: Car;
-
-    // @ManyToOne(type => Preference,preference=>preference.id,{
-    //     nullable: false,
-    //     cascade: true,
-    //     eager: true
-    // })
-    // @JoinColumn()
-    // preference: Preference;
 
     hashPassword() {
         this.password = bcrypt.hashSync(this.password, 8);

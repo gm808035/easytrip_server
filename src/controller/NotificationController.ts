@@ -33,7 +33,7 @@ export class NotificationController {
         notice.fromUser = fromUser
         try {
             await getNotification.save(notice);
-            console.log("nice")
+
         } catch (e) {
             res.status(409).send("err");
             return;
