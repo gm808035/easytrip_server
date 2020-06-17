@@ -39,7 +39,7 @@
       "helmet": "^3.22.0",
       "jsonwebtoken": "^8.5.1",
       "mdbootstrap": "^4.15.0",
-      "mongoose": "~5.0.9",
+      "mongoose": "~5.7.5",
       "mssql": "^4.0.4",
       "mysql": "^2.14.1",
       "pg": "^8.1.0",
