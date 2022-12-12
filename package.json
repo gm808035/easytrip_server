@@ -34,7 +34,7 @@
       "bootstrap-vue": "^2.10.1",
       "class-validator": "latest",
       "cors": "^2.8.5",
-      "express": "^4.15.4",
+      "express": "^4.17.3",
       "git": "^0.1.5",
       "helmet": "^3.22.0",
       "jsonwebtoken": "^8.5.1",
